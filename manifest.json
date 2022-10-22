@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "FantasyHacksPro", 
+    "description": "Compare ESPN draft recap results to mid/high stakes players average ADP for your team",
+    "version": "0.0.0", 
+    "icons": {
+        "16": "images/matrix128.png",
+        "128": "images/matrix128.png"
+    },
+    "action": {
+        "browser_style": true,
+        "default_icon": {
+            "16": "images/matrix128.png"
+        },
+        "default_title": "FantasyHacksPro",
+        "default_popup": "popup.html"
+    },
+    "host_permissions": [
+        "https://www.fantasypros.com/*",
+        "https://fantasy.espn.com/*"
+    ]
+}
