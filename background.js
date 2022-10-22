@@ -16,17 +16,13 @@ function startClicked(tab) {
 }
 
 
-
-// create obj store names of players and highstakes adp as key/value pairs to compare later
-// access the actual elements we want via the classes within the id table, starting with ranks
-
 // now have a html collection of rank elements, need innertext for any given rank num
 // sidenote for above dont need html of rank for highstakes need it for draft results aka "new rank"
 
 // now the high stakes ranks
 
-function fillBase() {
-    const baseValues = {};
+function fillRanks() {
+    const rankValues = {};
     // get our parentDOM ie the table of players and ranks
     const tableDOM = document.getElementById("ranking-table");
 
@@ -37,20 +33,15 @@ function fillBase() {
 
         let currentRank = (i + 1);
 
-        baseValues[playerName] = currentRank;
+        rankValues[playerName] = currentRank;
     }
     
-    return baseValues;
+    return rankValues;
 }
 
 // let currentRank = tableDOM.getElementsByClassName(" sticky-cell sticky-cell-one")[i].innerText;
 // let currentPlayer = tableDOM.getElementsByClassName("player-cell player-cell__td")[2].innerText
 
-function draftResults() {
-    let draftNum; 
-    let draftPlayer;
-
-}
 
 // player names for espn:
 // let espnPlayers = document.getElementsByClassName("AnchorLink link clr-link pointer")[i].innerText;
