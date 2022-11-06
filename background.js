@@ -17,7 +17,7 @@ console.log('is this change being recognized?')
 // this is the drafts by team button
 
 window.addEventListener('DOMContentLoaded', function() {
-    const byTeams = document.querySelector("#fitt-analytics > div > div.jsx-3010562182.shell-container > div.page-container.cf > div.layout.is-full > div > div.jsx-2127519131.container.FFL--container.gameBorder > div.jsx-219853476.draftData > div > div > ul > li.jsx-559466336.clr-link.selected-item")
+    const byTeams = document.querySelector("#fitt-analytics > div > div.jsx-3010562182.shell-container > div.page-container.cf > div.layout.is-full > div > div.jsx-2127519131.container.FFL--container.gameBorder > div.jsx-219853476.draftData > div > div > ul > li:nth-child(2)")
     byTeams.addEventListener('click', function() {
         chrome.action.openPopup();
     })

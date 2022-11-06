@@ -1,4 +1,6 @@
 
+const proRanks = {};
+
 function fillRanks() {
     const rankValues = {};
     // get our parentDOM ie the table of players and ranks
@@ -17,18 +19,22 @@ function fillRanks() {
     return rankValues;
 }
 
-const proRanks = fillRanks();
+window.addEventListener('DOMContentLoaded', function() {
+    console.log('script is running on fantasyPros');
+    proRanks = fillRanks();
+})
+
 
 
 // send ranks obj called goodRanks back over to espn tab
 // move tab back to espn tab
 
-chrome.runtime.sendMessage;
+// chrome.runtime.sendMessage;
 
-function runFpScript(message, sender, sendResponse) {
-    console.log('content script for fantasy pros received message :)');
-}
+// function runFpScript(message, sender, sendResponse) {
+//     console.log('content script for fantasy pros received message :)');
+// }
 
-ourButton.addEventListener("click", function() {
-    alert('This click worked');
-});
+// ourButton.addEventListener("click", function() {
+//     alert('This click worked');
+// });
