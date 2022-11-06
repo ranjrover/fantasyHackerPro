@@ -17,8 +17,18 @@ function fillRanks() {
     return rankValues;
 }
 
-fillRanks();
+const proRanks = fillRanks();
 
 
-// send ranks obj back over to espn tab
+// send ranks obj called goodRanks back over to espn tab
 // move tab back to espn tab
+
+chrome.runtime.sendMessage;
+
+function runFpScript(message, sender, sendResponse) {
+    console.log('content script for fantasy pros received message :)');
+}
+
+ourButton.addEventListener("click", function() {
+    alert('This click worked');
+});
