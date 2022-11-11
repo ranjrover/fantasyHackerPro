@@ -1,37 +1,50 @@
 
-// this is such a mess, laying out the steps
+// the steps to functionality
 // user clicks on draft recap 'by team' button
 // background script recognizes click and opens the popup
 // user clicks the corresponding button on the popup
-// ???? then redirected to correct url on a new tab 
-// fantasypros script executes on new tab, sends message back containing ranks object
-// background script receives message and stores ranks object, then executes espnscript
-// espnscript requests the ranks obj from background script as it is necessary for the script to execute
+// popup.js redirects to correct url on a new tab 
+// fantasypros script executes on new tab, stores ranks with chrome.storage
+// background script receives message and uses key/value pairs from storage to execute espnscript
 // script executes, divs are altered, all is good :)
 
-// const theRanks = {};
 
-console.log('background script says hello')
-console.log('is this change being recognized?')
+console.log('background says hello');
 
-// this is the drafts by team button
+let mainTabId = 111;
+let proRanks = {};
 
-window.addEventListener('DOMContentLoaded', function() {
-    const byTeams = document.querySelector("#fitt-analytics > div > div.jsx-3010562182.shell-container > div.page-container.cf > div.layout.is-full > div > div.jsx-2127519131.container.FFL--container.gameBorder > div.jsx-219853476.draftData > div > div > ul > li:nth-child(2)")
-    byTeams.addEventListener('click', function() {
-        chrome.action.openPopup();
-    })
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.code === 'switching-tabs') {
+        getCurrentTab().then(tabid => {
+            mainTabId = tabid;
+            console.log(mainTabId);
+        }).catch(err => {
+            console.log(err);
+        });
+        sendResponse('successfully stored mainTab ID');
+    } else if (message.code === 'ranks-filled') {
+        let prosTab = sender.tab.id
+        console.log(prosTab);
+        proRanks = message.ranks;
+        chrome.tabs.update(mainTabId, { active: true });
+        chrome.tabs.onUpdated.addListener(function() {
+            chrome.tabs.remove(prosTab);
+        })
+        chrome.scripting.executeScript(
+            {
+                target: { tabId: mainTabId },
+                files: ['espnScript.js']
+            })
+    } else if (message === 'need-ranks') {
+        sendResponse(proRanks);
+    }
 })
 
-// byTeams.addEventListener('click', () => {
-//     chrome.action.openPopup()
-// })
 
-
-// chrome.runtime.onMessage.addLisener(
-//     function(request, sender, sendResponse) {
-//         if (request.ranks) {
-//             theRanks = request.ranks
-//         }
-//     }
-// );
+async function getCurrentTab() {
+    let queryOptions = { active: true, currentWindow: true };
+    // `tab` will either be a `tabs.Tab` instance or `undefined`.
+    let tabs = await chrome.tabs.query(queryOptions);
+    return tabs[0].id;
+  }

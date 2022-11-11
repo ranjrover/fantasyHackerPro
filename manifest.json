@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "FantasyHacksPro", 
+    "name": "DraftAnalysisPro", 
     "description": "Quickly compare your ESPN fantasy draft to the ADP for your players",
-    "version": "0.0.0", 
+    "version": "0.0.1", 
     "icons": {
         "16": "images/matrix128.png",
         "128": "images/matrix128.png"
@@ -12,11 +12,12 @@
         "default_icon": {
             "16": "images/matrix128.png"
         },
-        "default_title": "FantasyHacksPro",
+        "default_title": "DraftAnalysisPro",
         "default_popup": "popup.html"
     },
     "permissions": [
-        "tabs"
+        "tabs",
+        "scripting"
     ],
     "host_permissions": [
         "https://www.fantasypros.com/*",
@@ -24,5 +25,12 @@
     ],
     "background": {
         "service_worker": "background.js"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.fantasypros.com/nfl/rankings/*"],
+            "js": ["./fantasyPros.js"],
+            "run_at": "document_end"
+        }
+    ]
 }
