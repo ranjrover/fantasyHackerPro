@@ -9,15 +9,6 @@ chrome.runtime.sendMessage('need-ranks', function(response) {
 })
 
 
-
-// player names for espn:
-// let espnPlayers = document.getElementsByClassName("AnchorLink link clr-link pointer")[i].innerText;
-// player drafted rank:
-// let draftedRanks = document.getElementsByClassName("jsx-2810852873 table--cell")[i].innerText;
-// div that holds rank, player, etc:
-// let playerDivs = document.getElementsByClassName("Table__TR Table__TR--sm Table__odd")[i]
-
-
 function stylize(ranksObj) {
 
     for (let i = 0; i < 280; i++) {
@@ -53,7 +44,7 @@ function stylize(ranksObj) {
             currSpan.style.fontSize = '11px';
         } else {
             playerDivs.style.backgroundColor = 'rgba(0, 0, 0, .4)'
-            currSpan.innerText = `DST ADP? Lol`;
+            currSpan.innerText = `DST ADP: Jokes`;
             currSpan.style.fontSize = '11px';
         }
     }
